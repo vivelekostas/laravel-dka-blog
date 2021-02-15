@@ -11,6 +11,18 @@
 |
 */
 
+/**
+ * Группа маршрутов для админки, где у каждого маршрута внтури группы будет префикс admin,
+ * используются котнроллеры только из дир-рии Admin, и требуется обязательная аутентификация.
+ */
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth']], function(){
+    Route::get('/', 'DashboardController@dashboard')->name('admin.index');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
