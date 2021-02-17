@@ -25,23 +25,22 @@
                 </div>
             </div>
         </div>
-{{--    </div>--}}
 
-    <div class="row">
-        <div class="col-sm-6">
-            <a class="btn btn-block btn-default" href="#">Создать категорию</a>
-            <a class="list-group-item" href="#">
-                <h4 class="list-group-item-heading">Категория первая</h4>
-                <p class="list-group-item-text">Кол-во материалов</p>
-            </a>
+        <div class="row">
+            <div class="col-sm-6">
+                <a class="btn btn-block btn-default" href="{{route('admin.category.create')}}">Создать категорию</a>
+                <a class="list-group-item" href="#">
+                    <h4 class="list-group-item-heading">Категория первая</h4>
+                    <p class="list-group-item-text">Кол-во материалов</p>
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <a class="btn btn-block btn-default" href="#">Создать материал</a>
+                <a class="list-group-item" href="#">
+                    <h4 class="list-group-item-heading">Материал первый</h4>
+                    <p class="list-group-item-text">Категория</p>
+                </a>
+            </div>
         </div>
-        <div class="col-sm-6">
-            <a class="btn btn-block btn-default" href="#">Создать материал</a>
-            <a class="list-group-item" href="#">
-                <h4 class="list-group-item-heading">Материал первый</h4>
-                <p class="list-group-item-text">Категория</p>
-            </a>
-        </div>
-    </div>
     </div>
 @endsection
