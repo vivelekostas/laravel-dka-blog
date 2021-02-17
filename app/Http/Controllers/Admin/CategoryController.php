@@ -43,6 +43,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         Category::create($request->all());
+
         return redirect()->route('admin.category.index');
     }
 
@@ -61,11 +62,15 @@ class CategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', [
+            'category' => $category,
+            'categories' => Category::with('children')->where('parent_id', '0')->get(),
+            'delimiter' => ''
+        ]);
     }
 
     /**
@@ -77,7 +82,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->except('slug')); // слаг меняться не должен
+
+        return redirect()->route('admin.category.index');
     }
 
     /**
