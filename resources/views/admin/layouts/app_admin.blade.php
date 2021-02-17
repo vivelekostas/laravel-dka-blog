@@ -12,6 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/124a6612da.js"></script>
 </head>
 <body>
 <div id="app">
@@ -39,7 +42,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Блог</a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"></a>Категории</li>
+                            <li><a href="{{route('admin.category.index')}}"></a>Категории</li>
                             <li><a href="#"></a>Материалы</li>
                         </ul>
                     </li>
