@@ -42,8 +42,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Блог</a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{route('admin.category.index')}}"></a>Категории</li>
-                            <li><a href="{{route('admin.article.index')}}"></a>Материалы</li>
+                            <li><a href="{{route('admin.category.index')}}">Категории</a></li>
+                            <li><a href="{{route('admin.article.index')}}">Материалы</a></li>
                         </ul>
                     </li>
                 </ul>
