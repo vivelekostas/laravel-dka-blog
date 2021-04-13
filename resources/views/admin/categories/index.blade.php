@@ -41,6 +41,7 @@
                     </tr>
                 @endforelse
             </tbody>
+            {{-- Отображение результатов страничного вывода links() --}}
             <tfoot>
             <tr>
                 <td colspan="3">
