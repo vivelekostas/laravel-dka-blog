@@ -68,11 +68,15 @@ class ArticleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit(Article $article)
     {
-        //
+        return view('admin.articles.edit', [
+            'article' => $article,
+            'categories' => Category::with('children')->where('parent_id', '0')->get(),
+            'delimiter' => ''
+        ]);
     }
 
     /**
@@ -80,21 +84,32 @@ class ArticleController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $article->update($request->except('slug'));
+
+        // добавление категорий к новости/статье
+        $article->categories()->detach();
+        if ($request->input('categories')) :
+            $article->categories()->attach($request->input('categories'));
+        endif;
+
+        return redirect()->route('admin.article.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Article $article)
     {
-        //
+        $article->categories()->detach();
+        $article->delete();
+
+        return redirect()->route('admin.article.index');
     }
 }

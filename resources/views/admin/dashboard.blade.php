@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h1>J'aime Murcha!</h1>
+            <h1>J'aime ma Murcha!</h1>
             <div class="col-sm-3">
                 <div class="jumbotron">
                     <p><span class="label label-primary">Категорий 0</span></p>
