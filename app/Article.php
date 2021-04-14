@@ -23,6 +23,12 @@ class Article extends Model
         return $this->morphToMany('App\Category', 'categoryable');
     }
 
+    /**
+     * Динамический скоуп по последним статьям для статистики дашборда.
+     * @param $query
+     * @param $count
+     * @return mixed\
+     */
     public function scopeLastArticles($query, $count)
     {
         return $query->orderBy('created_at', 'desc')->take($count)->get();

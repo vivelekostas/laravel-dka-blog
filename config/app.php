@@ -179,6 +179,8 @@ return [
 
         // сраный визивиг
         Unisharp\Ckeditor\ServiceProvider::class,
+        // мой провайдер
+        App\Providers\BlogServiceProvider::class,
 
     ],
 

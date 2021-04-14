@@ -33,6 +33,12 @@ class Category extends Model
         return $this->morphedByMany('App\Article', 'categoryable');
     }
 
+    /**
+     * Динамический скоуп по последним категориям для статистики дашборда.
+     * @param $query
+     * @param $count
+     * @return mixed
+     */
     public function scopeLastCategories($query, $count)
     {
         return $query->orderBy('created_at', 'desc')->take($count)->get();
