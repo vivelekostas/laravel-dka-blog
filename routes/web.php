@@ -11,6 +11,9 @@
 |
 */
 
+
+Route::get('/blog/category/{slug?}', 'BlogController@category')->name('category');
+Route::get('/blog/article/{slug?}', 'BlogController@article')->name('article');
 /**
  * Группа маршрутов для админки, где у каждого маршрута внтури группы будет префикс admin,
  * используются котнроллеры только из дир-рии Admin, и требуется обязательная аутентификация.
