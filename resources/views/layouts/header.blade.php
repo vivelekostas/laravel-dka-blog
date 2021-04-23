@@ -48,6 +48,7 @@
                             </li>
                         </ul>
                     </li>
+                    <li><a href="{{route('admin.index')}}">Admin</a></li>
                 @endguest
             </ul>
         </div>

@@ -4,9 +4,9 @@
 
     <div class="container">
         @component('admin.components.breadcrumb')
-            @slot('title') Создание новости @endslot
+            @slot('title') Создание Пользователя @endslot
             @slot('parent') Главная @endslot
-            @slot('active') Новости @endslot
+            @slot('active') Пользователь @endslot
         @endcomponent
 
         <hr>
