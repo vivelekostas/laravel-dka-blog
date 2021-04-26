@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Article;
 use App\Category;
+use App\Mail\NewArticleMail;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
@@ -39,7 +42,7 @@ class ArticleController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -49,6 +52,23 @@ class ArticleController extends Controller
         if ($request->input('categories')) :
             $article->categories()->attach($request->input('categories'));
         endif;
+
+        $categoriesOfArticle = $article->categories()->where('parent_id', '>=', 0)->get();
+
+        foreach ($categoriesOfArticle as $category) {
+            $categories[] = $category->title;
+        }
+
+        $categoryStr = implode(", ", $categories);
+        $article->category = $categoryStr;
+
+        $users = User::all();
+        $newArticleMail = new NewArticleMail($article);
+
+        foreach ($users as $user) {
+            $newArticleMail->userName = $user->name;
+            Mail::to($user)->send($newArticleMail);
+        }
 
         return redirect()->route('admin.article.index');
     }
