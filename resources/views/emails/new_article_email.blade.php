@@ -8,7 +8,7 @@
 <div>
     <p>Привет, {{$userName}}! В блоге опубликовали новую статью:
         <a href="http://dka-blog.test/blog/article/{{$article->slug}}"><b>{{$article->title}}</b></a>
-        В категории: {{$article->category}}
+        В категориях: {{$article->categories()->pluck('title')->implode(', ')}}. Может быть, вам будет интересно!
     </p>
     <p>{{$article->description_short}}</p>
 </div>

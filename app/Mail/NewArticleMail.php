@@ -8,11 +8,26 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+/**
+ * Письмо, которое отправляется всем юзерам при создании новой статьи. Запускается слушателем
+ * из соответствующего события. Принимает эту новую статью для передачи в шаблон этого письма.
+ * Class NewArticleMail
+ * @package App\Mail
+ */
 class NewArticleMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * Имя поль-ля для шаблона письма.
+     * @var
+     */
     public $userName;
+
+    /**
+     * Новая статья с данными для шаблона.
+     * @var Article
+     */
     public $article;
 
     /**
@@ -33,6 +48,6 @@ class NewArticleMail extends Mailable
     public function build()
     {
         return $this->from('superblog@tresh.com')
-            ->view('emails.new_article');
+            ->view('emails.new_article_email');
     }
 }
