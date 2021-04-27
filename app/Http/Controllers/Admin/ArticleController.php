@@ -54,6 +54,9 @@ class ArticleController extends Controller
         // запуск события, которое отправит письмо
         event(new NewArticleCreated($article));
 
+        // флеш сообщение
+        session()->flash('flash_message', 'Ваша статья была успешно создана!');
+
         return redirect()->route('admin.article.index');
     }
 
@@ -99,6 +102,9 @@ class ArticleController extends Controller
         if ($request->input('categories')) :
             $article->categories()->attach($request->input('categories'));
         endif;
+
+        // флеш сообщение
+        session()->flash('flash_message', 'Ваша статья была успешно обновлена!');
 
         return redirect()->route('admin.article.index');
     }

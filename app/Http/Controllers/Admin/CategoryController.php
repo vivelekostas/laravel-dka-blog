@@ -44,6 +44,9 @@ class CategoryController extends Controller
     {
         Category::create($request->all());
 
+        // флеш сообщение
+        session()->flash('flash_message', 'Ваша категория была успешно создана!');
+
         return redirect()->route('admin.category.index');
     }
 
@@ -83,6 +86,9 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $category->update($request->except('slug')); // слаг меняться не должен
+
+        // флеш сообщение
+        session()->flash('flash_message', 'Ваша категория была успешно обновлена!');
 
         return redirect()->route('admin.category.index');
     }

@@ -89,12 +89,22 @@
         </div>
     </nav>
 
+    <div class="container">
+        @include('partials.flash')
+    </div>
+
+
     @yield('content')
 </div>
 
 <!-- Scripts -->
 <script src = "{{ asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script >
 <script src="{{ asset('js/app.js') }}"></script>
+
+<!-- скрипт для флешей -->
+<script>
+    $('div.alert').delay(3000).slideUp(300);
+</script>
 </body>
 </html>
 
