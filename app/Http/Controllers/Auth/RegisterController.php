@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Jobs\SendRegisterEmail;
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -62,10 +64,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        // Отправка задачи (отправить письмо) в очередь (метод dispatch) с отолженным выполнением на N минут.
+        $jobSendRegisterEmail = (new SendRegisterEmail($user))->delay(Carbon::now()->addMinutes(2));
+        dispatch($jobSendRegisterEmail);
+
+        return $user;
     }
 }
