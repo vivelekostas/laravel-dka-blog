@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Mail;
  * Class SendEmailAboutNewArticleCreated
  * @package App\Listeners
  */
-class SendEmailAboutNewArticleCreated
+class SendEmailAboutNewArticleCreated implements ShouldQueue
 {
     /**
      * Create the event listener.
