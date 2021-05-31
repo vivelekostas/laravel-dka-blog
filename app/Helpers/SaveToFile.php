@@ -19,8 +19,9 @@ class SaveToFile implements SaveStr
 
     public static function save(Article $article, User $user)
     {
-        $articleTitleStr = $article->title;
-        $articleInfoStr = 'Создана новая статья: ' . $articleTitleStr;
+        $articleTitle = $article->title;
+        $userName = $user->name;
+        $articleInfoStr = 'Пользователь ' . $userName .' опубликовал новую статью: '.$articleTitle;
         Storage::prepend('ArticleLog', $articleInfoStr);
     }
 }

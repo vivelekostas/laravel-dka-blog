@@ -7,7 +7,6 @@ namespace App\Helpers;
 use App\Article;
 use App\Helpers\Contracts\SaveStr;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -20,9 +19,8 @@ class SaveToLog implements SaveStr
 
     public static function save(Article $article, User $user)
     {
-//        $obj = new self();
         $articleTitle = $article->title;
-//        $articleInfo = 'Создана новая статья' . $articleTitle;
-        Log::info('Создана новая статья: '.$articleTitle);
+        $userName = $user->name;
+        Log::info('Пользователь ' . $userName .' опубликовал новую статью: '.$articleTitle);
     }
 }

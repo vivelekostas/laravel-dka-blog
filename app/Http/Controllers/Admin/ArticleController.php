@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use App\Category;
 use App\Events\NewArticleCreated;
+use App\Helpers\Contracts\SaveStr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -42,7 +44,7 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, SaveStr $saveStr)
     {
         $article = Article::create($request->all());
 
@@ -53,6 +55,9 @@ class ArticleController extends Controller
 
         // запуск события, которое отправит письмо
         event(new NewArticleCreated($article));
+
+        // запись о создании статьи в лог или файл (тест сервиспровайдера)
+        $saveStr->save($article, Auth::user());
 
         // флеш сообщение
         session()->flash('flash_message', 'Ваша статья была успешно создана!');
