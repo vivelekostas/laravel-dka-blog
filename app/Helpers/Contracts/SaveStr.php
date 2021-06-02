@@ -14,5 +14,5 @@ use Illuminate\Http\Request;
  */
 interface SaveStr
 {
-     public static function save(Article $article, User $user);
+     public static function save(Article $article, User $user, Request $request);
 }

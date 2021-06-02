@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Article;
 use App\Category;
-use App\Events\NewArticleCreated;
 use App\Helpers\Contracts\SaveStr;
+use \App\Helpers\Facades\SaveStrFacade;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -57,7 +57,7 @@ class ArticleController extends Controller
         event(new NewArticleCreated($article));
 
         // запись о создании статьи в лог или файл (тест сервиспровайдера)
-        $saveStr->save($article, Auth::user());
+        $saveStr->save($article, Auth::user(), $request);
 
         // флеш сообщение
         session()->flash('flash_message', 'Ваша статья была успешно создана!');
@@ -107,6 +107,9 @@ class ArticleController extends Controller
         if ($request->input('categories')) :
             $article->categories()->attach($request->input('categories'));
         endif;
+
+        //запись об обговлении статьи в лог или файл (тест фасада)
+        SaveStrFacade::save($article, Auth::user(), $request);
 
         // флеш сообщение
         session()->flash('flash_message', 'Ваша статья была успешно обновлена!');

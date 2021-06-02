@@ -181,7 +181,8 @@ return [
         Unisharp\Ckeditor\ServiceProvider::class,
         // мои провайдеры
         App\Providers\BlogServiceProvider::class,
-        App\Providers\SaveStrServiceProvider::class,
+        App\Providers\SaveStrFacadeServiceProvider::class,
+        App\Providers\SaveStrContainerServiceProvider::class,
 
     ],
 
@@ -231,6 +232,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+         // мои фасады
+        'SaveStrFacade' => App\Helpers\Facades\SaveStrFacade::class,
 
     ],
 

@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Регестрирует реализаторов интерфейса SaveStr в зависимости от среды разработки.
- * Class SaveStrServiceProvider
+ * Регестрирует реализаторов интерфейса SaveStrFacade в зависимости от среды разработки.
+ * Class SaveStrContainerServiceProvider
  * @package App\Providers
  */
-class SaveStrServiceProvider extends ServiceProvider
+class SaveStrContainerServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -31,8 +31,7 @@ class SaveStrServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Helpers\Contracts\SaveStr', function(){
-
+        $this->app->bind('App\Helpers\Contracts\SaveStr', function () {
             if (App::environment('local')) {
                 return new SaveToFile();
             }
